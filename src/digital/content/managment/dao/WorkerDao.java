@@ -41,4 +41,19 @@ public class WorkerDao extends ClassDao{
 		return false;
 	}
 	
+	public ResultSet listWorkerTasks(String workerId) throws SQLException {
+		
+		System.out.println("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks, "
+				+ "workers as s " + 
+				"where m.worker_id = "+ workerId +" and task_id = taks_id;");
+		
+		ResultSet query = getStmt().executeQuery("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks, "
+				+ "workers as s " + 
+				"where m.worker_id = "+ workerId +" and task_id = taks_id;");
+		
+		
+		return query;
+		
+	}
+	
 }

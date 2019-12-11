@@ -37,11 +37,12 @@ public class LogoutManagerServlet extends HttpServlet {
 		if(logout.equals("logout")) {
 			ManagerService managerService = new ManagerService();
 			managerService.setLogged(false);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://localhost:5812/ProjectManagment/LoginServlet");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://localhost:8080/ProjectManagment/LoginServlet");
 			requestDispatcher.forward(request, response);
 		}else if(logout.equals("logout_worker")) {
 			WorkerService workerService = new WorkerService();
 			workerService.setLogged(false);
+			workerService.setLoginId("");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginWorkerServlet");
 			requestDispatcher.forward(request, response);
 		}

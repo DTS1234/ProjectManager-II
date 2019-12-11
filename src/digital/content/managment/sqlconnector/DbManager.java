@@ -9,7 +9,7 @@ public class DbManager {
 	private static String _host = "localhost";
 	private static String _port = "3306";
 	private static String _user = "root";
-	private static String _pass = "Kaktus99";
+	private static String _pass = "admin";
 	private static String _db = "dcmdb";
 	
 	private static Connection connection;

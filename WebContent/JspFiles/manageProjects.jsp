@@ -10,13 +10,13 @@
 	
 	<body>
 		
-		<form action="http://localhost:5812/ProjectManagment/ListProjectsServlet">
+		<form action="http://localhost:8080/ProjectManagment/ListProjectsServlet">
 			
 			<button>List Projects</button>
 		
 		</form>
 		<br>
-		<form action="http://localhost:5812/ProjectManagment/JspFiles/addTask.jsp">	
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/addTask.jsp">	
 			
 			<button type="submit" >Add task to project</button>
 			
@@ -32,7 +32,7 @@
 		<br>
 		<br>
 		
-		<form action="http://localhost:5812/ProjectManagment/JspFiles/managerView.jsp">	
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/managerView.jsp">	
 			
 			<button type="submit" >Back</button>
 			

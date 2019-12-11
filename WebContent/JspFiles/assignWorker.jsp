@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-	<form name="assignForm" action="http://localhost:5812/ProjectManagment/AssignWorkerServlet">
+	<form name="assignForm" action="http://localhost:8080/ProjectManagment/AssignWorkerServlet">
 			<label for="taks_id"><b>Task Id</b></label>						
 			<br>
 			<input name="task_id" type="number" form="assignForm" required></input>

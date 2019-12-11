@@ -1,4 +1,18 @@
 @charset "UTF-8";
-a{
-	
+
+
+form{
+	align:center;
+	text:bold;
+}
+
+button{
+	margin-top:10px;
+		background-color: #4CAF50;
+	  	color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		cursor: pointer;
+		width: 30%;
 }

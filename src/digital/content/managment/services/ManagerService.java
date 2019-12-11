@@ -94,7 +94,7 @@ public class ManagerService {
 				
 				
 				out.println("<td>");//dodany button z taskami
-				out.println("<form action='http://localhost:5812/ProjectManagment/ShowProjectsTasks'>");
+				out.println("<form action='http://localhost:8080/ProjectManagment/ShowProjectsTasks'>");
 				out.println("<button name='task_button'type='submit'>show tasks</button>");
 				out.println("</form>");
 				out.println("</td>");
@@ -107,7 +107,7 @@ public class ManagerService {
 			
 			out.println("<br><br>");
 			
-			out.println("<form action='http://localhost:5812/ProjectManagment/JspFiles/manageProjects.jsp'>");
+			out.println("<form action='http://localhost:8080/ProjectManagment/JspFiles/manageProjects.jsp'>");
 			out.println("<button name='menu_button'type='submit'>back to menu</button>");
 			out.println("</form>");
 			
@@ -217,13 +217,13 @@ public class ManagerService {
 		
 		out.println("<br>");
 		
-		out.println("<form action='http://localhost:5812/ProjectManagment/JspFiles/assignWorker.jsp'>");
+		out.println("<form action='http://localhost:8080/ProjectManagment/JspFiles/assignWorker.jsp'>");
 		out.println("<button name='assign_button'type='submit'>assign worker to task</button>");
 		out.println("</form>");
 		
 		out.println("<br><br>");
 		
-		out.println("<form action='http://localhost:5812/ProjectManagment/JspFiles/manageProjects.jsp'>");
+		out.println("<form action='http://localhost:8080/ProjectManagment/JspFiles/manageProjects.jsp'>");
 		out.println("<button name='menu_button'type='submit'>back to menu</button>");
 		out.println("</form>");
 		

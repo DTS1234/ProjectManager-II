@@ -5,12 +5,13 @@
 
 	<head>
 		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/addTask.css" />
 		<title>Add task</title>
 	</head>
 	
 	<body>
 		
-		<form name="createTaskForm" action="http://localhost:5812/ProjectManagment/AddTaskToProject">
+		<form name="createTaskForm" action="http://localhost:8080/ProjectManagment/AddTaskToProject">
 				<label for="task_name"><b>Task Name</b></label>						
 				<br>
 				<input name="task_name" type="text" form="createTaskForm" required></input>
@@ -32,7 +33,7 @@
 		
 		<br><br><br>
 		
-		<form action="http://localhost:5812/ProjectManagment/JspFiles/managerView.jsp">	
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/managerView.jsp">	
 			
 			<button type="submit" >Back</button>
 			

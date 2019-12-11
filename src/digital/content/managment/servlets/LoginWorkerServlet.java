@@ -62,6 +62,7 @@ public class LoginWorkerServlet extends HttpServlet {
 				System.out.println(passwordPassed);
 				System.out.println("zalogowany");
 				worker.setLogged(true);
+				worker.setLoginId(idLogin);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

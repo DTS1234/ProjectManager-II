@@ -31,7 +31,7 @@ public class ClassDao {
 	
 	public void delete(String id, String table, String idType) throws SQLException, ClassNotFoundException  {
 		
-		stmt.executeQuery(" DELETE FROM " +  table.toString() + " WHERE = " + id.toString() +";" );//usuwa szajs po podanych parametrach
+		stmt.executeUpdate(" DELETE FROM " +  table.toString() + " WHERE = " + id.toString() +";" );//usuwa szajs po podanych parametrach
 	
 	}
 	

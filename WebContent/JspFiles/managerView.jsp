@@ -13,15 +13,15 @@
 		
 		<div align="center"> 
 		
-			<form name="manageProjectsForm" action="http://localhost:5812/ProjectManagment/ManageProjectsServlet">
+			<form name="manageProjectsForm" action="http://localhost:8080/ProjectManagment/ManageProjectsServlet">
 				<button form="manageProjectsForm" type = "submit">Manage Projects</button>
 			</form>
 			
-			<form name="createProjectForm" action="http://localhost:5812/ProjectManagment/CreateProjectServlet">
+			<form name="createProjectForm" action="http://localhost:8080/ProjectManagment/CreateProjectServlet">
 				<button form="createProjectForm" type="submit">Create new project</button>
 			</form>
 			
-			<form name="finishProjectForm" action="http://localhost:5812/ProjectManagment/FinishProjectServlet">
+			<form name="finishProjectForm" action="http://localhost:8080/ProjectManagment/FinishProjectServlet">
 				<button form="finishProjectForm" type="submit">Finish project</button>
 			</form>
 						
@@ -30,7 +30,7 @@
 		
 		<div align="center">
 		
-			<form name="logoutForm" action="http://localhost:5812/ProjectManagment/LogoutManagerServlet">
+			<form name="logoutForm" action="http://localhost:8080/ProjectManagment/LogoutManagerServlet">
 				<button form="logoutForm" name="logout_button" type="submit" value="logout">Logout</button>
 			</form>
 			
