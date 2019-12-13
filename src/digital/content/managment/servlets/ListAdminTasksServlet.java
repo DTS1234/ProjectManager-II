@@ -4,26 +4,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import digital.content.managment.services.ManagerService;
+import digital.content.managment.services.AdminService;
 
 /**
- * Servlet implementation class ManagerServlet
+ * Servlet implementation class ListAdminTasks
  */
-@WebServlet("/ListProjectsServlet")
-public class ListProjectsServlet extends HttpServlet {
+@WebServlet("/ListAdminTasksServlet")
+public class ListAdminTasksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListProjectsServlet() {
+    public ListAdminTasksServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,17 @@ public class ListProjectsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Im here");
-	    response.setContentType("text/html");  
+		
 		PrintWriter out = response.getWriter();
-				
-		ManagerService manager = new ManagerService();
+		
+		AdminService admin = new AdminService();
 		
 		try {
-			
-			manager.listProjects(out, manager.getLoginId());			
-			
-		} catch (ClassNotFoundException e) {
-			System.out.println("Wrong");
+			admin.printTasks(out);
+		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Wrong");
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-				
 	}
 
 	/**

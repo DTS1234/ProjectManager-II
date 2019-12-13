@@ -1,29 +1,28 @@
 package digital.content.managment.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import digital.content.managment.services.ManagerService;
+import digital.content.managment.services.AdminService;
 
 /**
- * Servlet implementation class ManagerServlet
+ * Servlet implementation class CreateWorkerServlet
  */
-@WebServlet("/ListProjectsServlet")
-public class ListProjectsServlet extends HttpServlet {
+@WebServlet("/CreateWorkerServlet")
+public class CreateWorkerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListProjectsServlet() {
+    public CreateWorkerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,25 @@ public class ListProjectsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Im here");
-	    response.setContentType("text/html");  
-		PrintWriter out = response.getWriter();
-				
-		ManagerService manager = new ManagerService();
+		
+		String workerId = request.getParameter("worker_id");
+		String workerPassword = request.getParameter("worker_password");
+		String workerName = request.getParameter("worker_name");
+		
+		
+		AdminService admin = new AdminService();
 		
 		try {
-			
-			manager.listProjects(out, manager.getLoginId());			
-			
-		} catch (ClassNotFoundException e) {
-			System.out.println("Wrong");
+			admin.createWorker(workerId, workerName, workerPassword);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/adminView.jsp");
+			requestDispatcher.forward(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Wrong");
-			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/errorAdmin.jsp");
+			requestDispatcher.forward(request, response);
 		}
-				
+		
 	}
 
 	/**

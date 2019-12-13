@@ -21,17 +21,12 @@ public class ClassDao {
 		return stmt;
 	}
 
-	public Object findById(String id, String table, String idType) throws SQLException, ClassNotFoundException  {
-		
-			ResultSet queryResult = stmt.executeQuery("SELECT "+id.toString()+" FROM " + table.toString() + " WHERE " + idType.toString() + " = " + id +";");
-			Object value = queryResult.getObject(1);		
-		
-		return value;
-	}
 	
 	public void delete(String id, String table, String idType) throws SQLException, ClassNotFoundException  {
 		
-		stmt.executeUpdate(" DELETE FROM " +  table.toString() + " WHERE = " + id.toString() +";" );//usuwa szajs po podanych parametrach
+		
+		System.out.println("DELETE  FROM " +  table.toString() + " WHERE "+idType+" = "+ id.toString() +";");
+		stmt.executeUpdate("DELETE  FROM " +  table.toString() + " WHERE "+idType+" = "+ id.toString() +";" );//usuwa szajs po podanych parametrach
 	
 	}
 	
@@ -44,13 +39,24 @@ public class ClassDao {
 	
 	public ResultSet createUniqueSet(String table, String id, String searchedID) throws SQLException{ //tworzy talblice z sql i przechowuje w zmiennej query
 		
-		ResultSet query = getStmt().executeQuery("SELECT * FROM "+table+" WHERE "+id+" >= "+ searchedID+";");//zmieñ !!!!
+		System.out.println("SELECT * FROM "+table+" WHERE "+id+" = "+ searchedID+";" + " bala bala");
+		ResultSet query = getStmt().executeQuery("SELECT * FROM "+table+" WHERE "+id+" = "+ searchedID+";");//zmieñ !!!!
 		
 		return query;
 	}
 	
+	public void createUser(String workerId, String workerName, String workerPassword) throws SQLException {
+		
+		getStmt().executeUpdate("INSERT INTO workers ( worker_id, worker_name, worker_password )\r\n" + 
+				"VALUES ("+workerId+", '"+workerName+"', '"+workerPassword+"') ;");
+		
+	}
 	
-	
-	
-	
+	public void createManager(String managerId, String managerName, String managerPassword) throws SQLException {
+			
+			getStmt().executeUpdate("INSERT INTO managers ( manager_id, manager_name, manager_password )\r\n" + 
+					"VALUES ("+managerId+", '"+managerName+"', '"+managerPassword+"') ;");
+			
+		}
+
 }

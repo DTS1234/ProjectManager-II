@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 
 import digital.content.managment.dao.WorkerDao;
 
@@ -102,6 +104,42 @@ public class WorkerService {
 
 	public void setLoginId(String loginId) {
 		WorkerService.loginId = loginId;
+	}
+	
+	public String setRealFinish(String taskId) throws SQLException, ClassNotFoundException {//metoda liczy czas trwania wykonania tasku
+		
+		WorkerDao worker = new WorkerDao();
+		String taskStart = worker.getTaskStartDate(taskId);
+		
+		LocalDate localDateTime = LocalDate.now();
+		LocalDate taskStartTime = LocalDate.parse(taskStart);
+		
+		Period period = Period.between(taskStartTime, localDateTime);			
+		
+		String result = period.getDays()+"";
+		
+		return result;			
+		
+	}
+	
+	public String setRealTaskDate(String taskId) throws SQLException, ClassNotFoundException {//metoda liczy czas wykonania tasku
+		
+		WorkerDao worker = new WorkerDao();
+		
+		System.out.println(worker.getTaskStartDate(taskId));
+		
+		String taskStart = worker.getTaskStartDate(taskId);
+		
+		
+		
+		LocalDate taskStartTime = LocalDate.parse(taskStart);
+		LocalDate resultDate = taskStartTime.plusDays(Integer.parseInt(setRealFinish(taskId)));
+		
+		String result = resultDate.toString();
+		System.out.println(resultDate);
+		
+		return result;		
+		
 	}
 	
 }

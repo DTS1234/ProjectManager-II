@@ -51,25 +51,43 @@ public class ManagerDao extends ClassDao {
 			
 		}
 	
-	public void createTask(String taskId, String taskName, String projectId, String plannedDeadline) throws SQLException {
+	public void createTask(String taskId, String taskName, String projectId, String plannedDeadline, String taskStart) throws SQLException {
 		
-		System.out.println("INSERT INTO tasks (task_id, project_id, task_name, planned_task_deadline)" +
+		System.out.println("INSERT INTO tasks (task_id, project_id, task_name, planned_task_deadline, task_start_date)" +
 				"VALUES ( "+taskId+", "+projectId+", '"+taskName+"', '"+plannedDeadline+"');");
-		getStmt().executeUpdate("INSERT INTO tasks (task_id, project_id, task_name, planned_task_deadline)" +
-				"VALUES ( "+taskId+", "+projectId+", '"+taskName+"', '"+plannedDeadline+"');");
-		
+		getStmt().executeUpdate("INSERT INTO tasks (task_id, project_id, task_name, planned_task_deadline, task_start_date)" +
+				"VALUES ( "+taskId+", "+projectId+", '"+taskName+"', '"+plannedDeadline+"', '"+taskStart+"');");		
 	}
 	
 	public void addWorkerToTask(String taskId, String workerId) throws SQLException {
 		getStmt().executeUpdate("INSERT INTO workerstasks (worker_id, taks_id) VALUES ("+workerId+", "+taskId+");");
 	}
 	
-	public ResultSet printWorkersAndTasks() throws SQLException {
+	public ResultSet printWorkersAndTasks(String projectId) throws SQLException {
 		
-		ResultSet query = getStmt().executeQuery("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks, workers as s " + 
-				"where m.worker_id = s.worker_id and task_id = taks_id;");
+		System.out.println("SELECT task_id, task_name, project_id, w.worker_id, worker_name from tasks as t, workerstasks as m, \r\n" + 
+				"workers as w where w.worker_id = m.worker_id AND t.task_id = m.taks_id and project_id = "+projectId+";");
+		
+		ResultSet query = getStmt().executeQuery("SELECT task_id, task_name, project_id, w.worker_id, worker_name from tasks as t, workerstasks as m, \r\n" + 
+				"workers as w where w.worker_id = m.worker_id AND t.task_id = m.taks_id and project_id = "+projectId+";");
 		
 		return query;
 	}
 	
+	public ResultSet printAvailabaleWorkers() throws SQLException {
+		
+		ResultSet query = getStmt().executeQuery("SELECT m.worker_name, m.worker_id from workers as m, projects as p where m.worker_id NOT IN (Select worker_id from workerstasks) AND project_id = 1;");
+		
+		return query;
+	}
+	
+	public ResultSet checkIfTasksAreDone(String projectId) throws SQLException {
+		
+		ResultSet query = getStmt().executeQuery("SELECT task_id, task_name, project_id, w.worker_id, worker_name from tasks as t, workerstasks as m, \r\n" + 
+				"workers as w where w.worker_id = m.worker_id AND t.task_id = m.taks_id and project_id = "+projectId+" and t.task_duration IS NULL;");
+		
+		return query;
+		
+	}
+		
 }

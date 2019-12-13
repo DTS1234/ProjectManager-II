@@ -46,7 +46,8 @@ public class AssignWorkerServlet extends HttpServlet {
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/error.jsp");
+			requestDispatcher.forward(request, response);
 		}
 		
 	}

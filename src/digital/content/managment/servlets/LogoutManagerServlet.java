@@ -33,11 +33,12 @@ public class LogoutManagerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String logout = request.getParameter("logout_button");
-		System.out.println(logout);
+		System.out.println(logout+"!!!");
 		if(logout.equals("logout")) {
 			ManagerService managerService = new ManagerService();
 			managerService.setLogged(false);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://localhost:8080/ProjectManagment/LoginServlet");
+			managerService.setLoginId("");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginServlet");
 			requestDispatcher.forward(request, response);
 		}else if(logout.equals("logout_worker")) {
 			WorkerService workerService = new WorkerService();

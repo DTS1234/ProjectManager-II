@@ -1,10 +1,9 @@
 package digital.content.managment.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,44 +13,45 @@ import javax.servlet.http.HttpServletResponse;
 import digital.content.managment.services.ManagerService;
 
 /**
- * Servlet implementation class ManagerServlet
+ * Servlet implementation class FinishProjectServlet
  */
-@WebServlet("/ListProjectsServlet")
-public class ListProjectsServlet extends HttpServlet {
+@WebServlet("/FinishProjectServlet")
+public class FinishProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListProjectsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    public FinishProjectServlet() {
+        super();    
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Im here");
-	    response.setContentType("text/html");  
-		PrintWriter out = response.getWriter();
-				
+		
 		ManagerService manager = new ManagerService();
 		
+		String projectId = request.getParameter("project_id");
+		System.out.println(projectId+" debug");
+		
 		try {
-			
-			manager.listProjects(out, manager.getLoginId());			
-			
-		} catch (ClassNotFoundException e) {
-			System.out.println("Wrong");
-			// TODO Auto-generated catch block
+			if(manager.checkIfTasksAreDone(projectId)) {
+				System.out.println("pusty");
+				manager.finishProject(projectId);
+				System.out.println("tutaj!!!");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/success.jsp");
+				requestDispatcher.forward(request, response);
+			}else {
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/errorFinishProject.jsp");
+				requestDispatcher.forward(request, response);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Wrong");
-			e.printStackTrace();
-		}
-				
+			
+		};
+		
 	}
 
 	/**

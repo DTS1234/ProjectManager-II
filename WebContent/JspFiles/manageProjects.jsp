@@ -21,12 +21,6 @@
 			<button type="submit" >Add task to project</button>
 			
 		</form>	
-		<br>
-		<form>
-			
-			<button>Assign worker to project</button>
-			
-		</form>
 		
 		<br>
 		<br>

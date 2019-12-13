@@ -36,7 +36,6 @@ public class WorkerTasksServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		try {
-			System.out.println("Chuj");
 			System.out.println(workerServ.getLoginId());
 			workerServ.listWorkerTasks(workerServ.getLoginId(), out);
 		} catch (ClassNotFoundException | SQLException e) {

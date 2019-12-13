@@ -36,13 +36,14 @@ public class AddTaskToProjectServlet extends HttpServlet {
 		String projectId = request.getParameter("project_id");
 		String taskName = request.getParameter("task_name");
 		String taskDeadline = request.getParameter("task_planned");
+		String taskStart = request.getParameter("task_start_date");
 		
 		ManagerService manager = new ManagerService();
 		
 		if(!(taskId==null||projectId==null||taskName==null||taskDeadline==null)){
 			
 			try {
-				manager.addTaskToProject(taskId, taskName, projectId, taskDeadline);
+				manager.addTaskToProject(taskId, taskName, projectId, taskDeadline, taskStart);
 				if(true) {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/manageProjects.jsp");
 					requestDispatcher.forward(request, response);

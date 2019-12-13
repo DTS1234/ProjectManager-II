@@ -43,16 +43,37 @@ public class WorkerDao extends ClassDao{
 	
 	public ResultSet listWorkerTasks(String workerId) throws SQLException {
 		
-		System.out.println("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks, "
+		System.out.println("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks as t, "
 				+ "workers as s " + 
-				"where m.worker_id = "+ workerId +" and task_id = taks_id;");
+				"where m.worker_id = "+ workerId +" and task_id = taks_id and task_duration IS NULL;");
 		
-		ResultSet query = getStmt().executeQuery("select task_id, task_name, m.worker_id, worker_name from workerstasks as m, tasks, "
-				+ "workers as s " + 
-				"where m.worker_id = "+ workerId +" and task_id = taks_id;");
+		
+		ResultSet query = getStmt().executeQuery("select task_id, task_name, s.worker_id, worker_name from workerstasks as m, tasks as t,"+ 
+				"workers as s where m.worker_id = " + workerId + " and m.worker_id = s.worker_id and task_id = taks_id and task_duration IS NULL;");
 		
 		
 		return query;
+		
+	}
+	
+	public void finishTask(String taskId, String realTaskDeadline, String taskDuration) throws SQLException {
+		
+		getStmt().executeUpdate("UPDATE tasks SET real_task_deadline = '"+realTaskDeadline+"', task_duration = '"+ taskDuration +
+				"' WHERE task_id = "+taskId+" ;");
+		
+	}
+	
+	public String getTaskStartDate(String taskId) throws SQLException {
+		
+		ResultSet query = getStmt().executeQuery("SELECT task_start_date FROM tasks WHERE task_id = " + taskId +";");
+		
+		String date = "";
+		
+		while(query.next()) {
+			 date = query.getString("task_start_date");
+		}
+		
+		return date;
 		
 	}
 	

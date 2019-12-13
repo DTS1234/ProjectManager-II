@@ -28,12 +28,16 @@
 				<br>				
 				<input name="project_id" type="number" form="createTasktForm" required></input>
 				<br><br>
+				<label for="task_start_date"><b>Task start date</b></label>
+				<br>				
+				<input name="task_start_date" type="date" form="createTasktForm" required></input>
+				<br><br>
 				<button form="createTaskForm" type="submit">Submit</button>		
 		</form>
 		
 		<br><br><br>
 		
-		<form action="http://localhost:8080/ProjectManagment/JspFiles/managerView.jsp">	
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/manageProjects.jsp">	
 			
 			<button type="submit" >Back</button>
 			

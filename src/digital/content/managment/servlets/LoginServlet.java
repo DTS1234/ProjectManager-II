@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
 			if(manager.loginManager(passwordPassed, idLogin)==true) {
 				System.out.println("zalogowany");
 				manager.setLogged(true);//zmieniam stan na zalogowany		
+				manager.setLoginId(idLogin);
 			}else {
 				String page = "JspFiles/login.jsp";
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);

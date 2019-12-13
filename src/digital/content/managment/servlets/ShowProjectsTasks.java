@@ -36,10 +36,13 @@ public class ShowProjectsTasks extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ManagerService manager = new ManagerService();		
 		
+		String projectId = request.getParameter("project_id");
+		
 		
 		try {
-			manager.listTasks(out, "1");
-			manager.printWorkersAndTasks(out);
+			manager.listTasks(out, projectId);
+			manager.printWorkersAndTasks(out, projectId);
+			manager.printAvailableWorkers(out);
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
