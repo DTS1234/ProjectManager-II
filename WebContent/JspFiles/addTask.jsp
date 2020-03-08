@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 
@@ -10,8 +12,9 @@
 	</head>
 	
 	<body>
-		
-		<form name="createTaskForm" action="http://localhost:8080/ProjectManagment/AddTaskToProject">
+		<div align="center">
+	
+			<form name="createTaskForm" action="http://localhost:8080/ProjectManagment/AddTaskToProject">
 				<label for="task_name"><b>Task Name</b></label>						
 				<br>
 				<input name="task_name" type="text" form="createTaskForm" required></input>
@@ -24,24 +27,41 @@
 				<br>
 				<input name="task_planned" type="date" form="createTaskForm" required></input>
 				<br><br>
-				<label for="project_id"><b>Project ID</b></label>
+			
+				<label for="project_id"><b>Available Projects:</b></label>
 				<br>				
-				<input name="project_id" type="number" form="createTasktForm" required></input>
-				<br><br>
+				<select style="width:155px" name="projects">
+					<c:forEach items="${projects}" var="current">
+	          			<option><c:out value="${current}" /></option>
+	          		</c:forEach>
+				</select>
+				<br><br>			
 				<label for="task_start_date"><b>Task start date</b></label>
 				<br>				
 				<input name="task_start_date" type="date" form="createTasktForm" required></input>
 				<br><br>
+				<label for="task_dependency"><b>Tasks available:</b></label>
+				<br>
+				<select style="width:155px" name="tasks">
+					<c:forEach items="${tasks}" var="current">
+	          			<option><c:out value="${current}" /></option>
+	          		</c:forEach>
+	           		<option>no dependency</option>       		
+				</select>
+				
+				<br><br>
 				<button form="createTaskForm" type="submit">Submit</button>		
-		</form>
-		
-		<br><br><br>
-		
-		<form action="http://localhost:8080/ProjectManagment/JspFiles/manageProjects.jsp">	
+			</form>
 			
-			<button type="submit" >Back</button>
-			
-		</form>
+			<br>
+		
+			<form action="http://localhost:8080/ProjectManagment/JspFiles/manageProjects.jsp">	
+				<button type="submit" >Back</button>
+			</form>
+				
+		</div>
+		
+		
 		
 	</body>
 	

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+button{
+	margin-top:5px;
+	background-color: #4CAF50;
+  	color: white;
+	padding: 20px 45px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 45%;
+}
+
+#welcome{
+	
+	font-family:sans-serif;
+	
+}

@@ -17,11 +17,11 @@
 				<button form="manageProjectsForm" type = "submit">Manage Projects</button>
 			</form>
 			
-			<form name="createProjectForm" action="http://localhost:8080/ProjectManagment/CreateProjectServlet">
+			<form name="createProjectForm" action="http://localhost:8080/ProjectManagment/JspFiles/createProjectView.jsp">
 				<button form="createProjectForm" type="submit">Create new project</button>
 			</form>
 			
-			<form name="finishProjectForm" action="http://localhost:8080/ProjectManagment/JspFiles/finishProject.jsp">
+			<form name="finishProjectForm" action="http://localhost:8080/ProjectManagment/ProjectListServlet">
 				<button form="finishProjectForm" type="submit">Finish project</button>
 			</form>
 						

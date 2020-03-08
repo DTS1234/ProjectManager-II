@@ -35,6 +35,12 @@
 		
 		</form>
 		
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/Welcome.jsp">	
+			
+			<button type="submit" >Back</button>
+			
+		</form>
+		
 	</body>
 
 </html>

@@ -1,7 +1,6 @@
 package digital.content.managment.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -26,33 +25,29 @@ public class CreateProjectServlet extends HttpServlet {
      */
     public CreateProjectServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		ManagerService manager = new ManagerService();
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/createProjectView.jsp");
-		requestDispatcher.forward(request, response);
-		
+				
 		String projectName = request.getParameter("project_name");
 		String projectId = request.getParameter("project_id");
-		String managerId = request.getParameter("manager_id");
+		String managerId = manager.getLoginId();
 
 		try {
 			manager.createProjectService(projectName, projectId, managerId);
 			
-			response.setContentType("text/html");  
-			PrintWriter out = response.getWriter();
-			out.println("Uda³o siê");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/managerView.jsp");
+			requestDispatcher.forward(request, response);
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/error.jsp");
+			requestDispatcher.forward(request, response);
 		}
 		
 	}
@@ -61,7 +56,6 @@ public class CreateProjectServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

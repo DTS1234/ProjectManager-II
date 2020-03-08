@@ -34,16 +34,39 @@ public class WorkerService {
 		
 	}
 	
+	public String stylingMethod() {
+		String styling = "<style>\r\n" + 
+				"table, td, th {  \r\n" + 
+				"  border: 1px solid #ddd;\r\n" + 
+				"  text-align: left;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"table {\r\n" + 
+				"  border-collapse: collapse;\r\n" + 
+				"  width: 100%;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"th, td {\r\n" + 
+				"  padding: 15px;\r\n" + 
+				"}\r\n" + "html{font-family:\"Trebuchet MS\", Helvetica, sans-serif}" +
+				
+				"</style>";
+		return styling;
+	}
+	
 	public void listWorkerTasks(String id, PrintWriter out) throws ClassNotFoundException, SQLException {
 		
 		WorkerDao worker = new WorkerDao();
-		
+		@SuppressWarnings("unused")
+		String idTask = "";
 		worker.listWorkerTasks(id);
 		ResultSet taskSet = worker.listWorkerTasks(id); //tworzymy tablice z projektami
 		ResultSetMetaData col = taskSet.getMetaData();
 		int colInt = col.getColumnCount();//pobieramy liczbe kolumn
 		
-		out.println("<table border=\"1\">");
+		out.println(stylingMethod());
+		
+		out.println("<table align='center' border=\"1\">");
 		
 		out.println("<tr>");
 		for (int i=1; i <= colInt; i++) 
@@ -60,6 +83,8 @@ public class WorkerService {
 		out.println("</tr>");
 		
 		while(taskSet.next()) {
+			
+			idTask = taskSet.getObject(1).toString();
 			
 			out.println("<tr>");
 			
@@ -79,8 +104,8 @@ public class WorkerService {
     	    }
 			
 			out.println("<td>");//dodany button z taskami
-			out.println("<form action='http://localhost:8080/ProjectManagment/JspFiles/finishTaskView.jsp'>");
-			out.println("<button name='task_button'type='submit'>Finish task</button>");
+			out.println("<form action='http://localhost:8080/ProjectManagment/FinishTaskServlet'>");
+			out.println("<button value='"+idTask+"' name='task_button' type='submit'>Finish task</button>");
 			out.println("</form>");
 			out.println("</td>");
 						
@@ -93,7 +118,7 @@ public class WorkerService {
 			out.println("<br><br>");
 			
 			out.println("<form action='http://localhost:8080/ProjectManagment/JspFiles/workerView.jsp'>");
-			out.println("<button name='menu_button'type='submit'>back to menu</button>");
+			out.println("<button  name='menu_button'type='submit'>back to menu</button>");
 			out.println("</form>");
 	}
 		
@@ -129,9 +154,7 @@ public class WorkerService {
 		System.out.println(worker.getTaskStartDate(taskId));
 		
 		String taskStart = worker.getTaskStartDate(taskId);
-		
-		
-		
+				
 		LocalDate taskStartTime = LocalDate.parse(taskStart);
 		LocalDate resultDate = taskStartTime.plusDays(Integer.parseInt(setRealFinish(taskId)));
 		

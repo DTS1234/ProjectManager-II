@@ -9,7 +9,7 @@
 	</head>
 	
 	<body>
-		<form name="createProjectForm">
+		<form name="createProjectForm" action="http://localhost:8080/ProjectManagment/CreateProjectServlet">
 			<label for="project_name"><b>Project Name</b></label>						
 			<br>
 			<input name="project_name" form="createProjectForm" required></input>
@@ -17,10 +17,6 @@
 			<label for="project_id"><b>Project ID</b></label>
 			<br>				
 			<input name="project_id" form="createProjectForm" required></input>
-			<br><br>
-			<label for="manager_id"><b>Manager ID</b></label>
-			<br>
-			<input name="manager_id"  form="createProjectForm" required></input>
 			<br><br>
 			<button form="createProjectFrom" type="submit">Submit</button>		
 		</form>

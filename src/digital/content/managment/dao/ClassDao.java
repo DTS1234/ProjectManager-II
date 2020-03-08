@@ -20,14 +20,21 @@ public class ClassDao {
 	public Statement getStmt() {
 		return stmt;
 	}
+	
+	public ResultSet findId(String id, String table, String name, String serachedName) throws SQLException {
+		
+		System.err.println("SELECT "+id+" FROM "+table+" WHERE "+name+" = '"+serachedName+"';");
+		ResultSet query = stmt.executeQuery("SELECT "+id+" FROM "+table+" WHERE "+name+" = '"+serachedName+"';");
+		
+		return query;
+	}
 
 	
 	public void delete(String id, String table, String idType) throws SQLException, ClassNotFoundException  {
 		
-		
-		System.out.println("DELETE  FROM " +  table.toString() + " WHERE "+idType+" = "+ id.toString() +";");
+		stmt.execute("SET FOREIGN_KEY_CHECKS=0;");
 		stmt.executeUpdate("DELETE  FROM " +  table.toString() + " WHERE "+idType+" = "+ id.toString() +";" );//usuwa szajs po podanych parametrach
-	
+		stmt.execute("SET FOREIGN_KEY_CHECKS=1;");
 	}
 	
 	public ResultSet createSet(String table) throws SQLException{ //tworzy talblice z sql i przechowuje w zmiennej query
@@ -39,7 +46,6 @@ public class ClassDao {
 	
 	public ResultSet createUniqueSet(String table, String id, String searchedID) throws SQLException{ //tworzy talblice z sql i przechowuje w zmiennej query
 		
-		System.out.println("SELECT * FROM "+table+" WHERE "+id+" = "+ searchedID+";" + " bala bala");
 		ResultSet query = getStmt().executeQuery("SELECT * FROM "+table+" WHERE "+id+" = "+ searchedID+";");//zmieñ !!!!
 		
 		return query;

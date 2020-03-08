@@ -10,6 +10,7 @@
 
 	<body>
 	
+		<div align="center">
 		<form name="finishTaskForm" action="http://localhost:8080/ProjectManagment/FinishTaskServlet">
 		
 			<label for="task_id"><b>Task Id</b></label>
@@ -31,7 +32,7 @@
 			<button type="submit" >Back</button>
 			
 		</form>
-		
+		</div>
 	</body>
 
 </html>

@@ -33,14 +33,13 @@ public class FinishProjectServlet extends HttpServlet {
 		
 		ManagerService manager = new ManagerService();
 		
-		String projectId = request.getParameter("project_id");
-		System.out.println(projectId+" debug");
 		
-		try {
+		String projectId = request.getParameter("project_id");
+		
+		try {		
+			
 			if(manager.checkIfTasksAreDone(projectId)) {
-				System.out.println("pusty");
 				manager.finishProject(projectId);
-				System.out.println("tutaj!!!");
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/success.jsp");
 				requestDispatcher.forward(request, response);
 			}else {

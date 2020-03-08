@@ -10,21 +10,31 @@
 	
 	<body>
 		
-		<div align="center"> 
+		<br><br><br>
 		
+		<div align="center"> 		 
+			
+			
+			<hr>
+			<br>
+			
 			<form name="manageTasksForm" action="http://localhost:8080/ProjectManagment/WorkerTasksServlet">
-				<button  form="manageTasksForm" type = "submit">Manage Tasks</button>
+				<button  form="manageTasksForm" type = "submit" style="width:150px">Manage Tasks</button>
 			</form>
 									
 		</div>
-		<br><br><br><br><br><br>
+		
+		<br><br>
 		
 		<div align="center">
 		
 			<form name="logoutForm" action="http://localhost:8080/ProjectManagment/LogoutManagerServlet">
-				<button form="logoutForm" name="logout_button" type="submit" value="logout_worker">Logout</button>
+				<button form="logoutForm" name="logout_button" type="submit" value="logout_worker" style="width:150px">Logout</button>
 			</form>
-			
+		
+		<br>
+		<hr>
+		
 		</div>
 		
 	</body>

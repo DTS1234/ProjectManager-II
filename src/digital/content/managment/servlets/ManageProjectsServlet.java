@@ -21,14 +21,12 @@ public class ManageProjectsServlet extends HttpServlet {
      */
     public ManageProjectsServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/manageProjects.jsp");
 		requestDispatcher.forward(request, response);	
 	}
@@ -37,7 +35,6 @@ public class ManageProjectsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

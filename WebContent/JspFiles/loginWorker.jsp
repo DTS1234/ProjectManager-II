@@ -9,11 +9,11 @@
 	
 	<body>
 		
-		<div align="center">
-		
+		<div align="center" style="margin:50px">
+			
+			<hr>
+			<br>			
 			<form name="loginForm" action="http://localhost:8080/ProjectManagment/LoginWorkerServlet" method="post" >
-				
-				<div class="container">
 					
 					<label for="login"><b>Login</b></label>						
 					<br>
@@ -24,18 +24,19 @@
 					<br>				
 					<input name="psw" type="password" form="loginForm" required></input>
 					<br><br>
-					<button type="submit">Submit</button>
-				
-				</div>
-				
+					<button style="width:150px" type="submit">Submit</button>				
 			</form>
-		
+			
+			<br>
+			
 			<form name="backForm" action="http://localhost:8080/ProjectManagment/JspFiles/Welcome.jsp">
 			
-				<button type="submit">back</button>
+				<button style="width:150px" type="submit">Back</button>
 			
 			</form>
-		
+			<br>
+			<hr>
+			
 		</div>	
 		
 	</body>

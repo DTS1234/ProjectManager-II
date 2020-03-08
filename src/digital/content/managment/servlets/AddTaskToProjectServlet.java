@@ -1,7 +1,9 @@
 package digital.content.managment.servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,34 +34,48 @@ public class AddTaskToProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ManagerService manager = new ManagerService();
+		
+		try {
+			List<String> projects = manager.createProjectsList(manager.getLoginId());
+			request.setAttribute("projects", projects);
+			
+			List<String> tasks = manager.createTasksList2();
+	        request.setAttribute("tasks", tasks);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/addTask.jsp");
+			requestDispatcher.forward(request, response);
+			
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		String projectName = request.getParameter("projects");
 		String taskId = request.getParameter("task_id");
-		String projectId = request.getParameter("project_id");
 		String taskName = request.getParameter("task_name");
 		String taskDeadline = request.getParameter("task_planned");
 		String taskStart = request.getParameter("task_start_date");
+		String taskDependency = request.getParameter("tasks");
 		
-		ManagerService manager = new ManagerService();
 		
-		if(!(taskId==null||projectId==null||taskName==null||taskDeadline==null)){
+		Date taskDeadLine = Date.valueOf(taskDeadline);
+		
+		if(taskDeadLine.after(new Date(System.currentTimeMillis()))){
 			
 			try {
-				manager.addTaskToProject(taskId, taskName, projectId, taskDeadline, taskStart);
-				if(true) {
-					RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/manageProjects.jsp");
-					requestDispatcher.forward(request, response);
-				}
+				
+				String projectId = manager.findIdOfProject(projectName);
+				manager.addTaskToProject(taskId, taskName, projectId, taskDeadline, taskStart, taskDependency);
+				
 			} catch (ClassNotFoundException | SQLException e) {
 				
-				System.out.println("Z³e dane");
-				
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/error.jsp");
-				requestDispatcher.forward(request, response);
-				
 				e.printStackTrace();
+			
 			}
 		}else {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/addTask.jsp");
-			requestDispatcher.forward(request, response);
+			
+			System.out.println("Z³e dane");
+			
 		}
 		
 	}
@@ -68,7 +84,6 @@ public class AddTaskToProjectServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

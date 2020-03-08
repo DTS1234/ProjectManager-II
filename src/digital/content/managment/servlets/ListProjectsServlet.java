@@ -3,7 +3,7 @@ package digital.content.managment.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +37,11 @@ public class ListProjectsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 				
 		ManagerService manager = new ManagerService();
-		
+				
 		try {
+			
+			ArrayList<String> projectList = (ArrayList<String>) manager.createProjectsList(manager.getLoginId());
+			request.setAttribute("projects", projectList);
 			
 			manager.listProjects(out, manager.getLoginId());			
 			

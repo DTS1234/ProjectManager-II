@@ -34,6 +34,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ManagerService manager = new ManagerService();
+				
+		
+		
 		
 		if((manager.isLogged())) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/managerView.jsp");
@@ -60,6 +63,12 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			
+			
+			if(passwordPassed.equals("admin")&idLogin.equals("99")) {
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://localhost:8080/ProjectManagment/JspFiles/adminView.jsp");
+				requestDispatcher.forward(request, response);
+			}else {
+			
 			System.out.println(passwordPassed);
 			
 			if(manager.loginManager(passwordPassed, idLogin)==true) {
@@ -67,11 +76,11 @@ public class LoginServlet extends HttpServlet {
 				manager.setLogged(true);//zmieniam stan na zalogowany		
 				manager.setLoginId(idLogin);
 			}else {
-				String page = "JspFiles/login.jsp";
+				String page = "http://localhost:8080/ProjectManagment/JspFiles/login.jsp";
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
 				requestDispatcher.forward(request, response);
 			}
-			
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();

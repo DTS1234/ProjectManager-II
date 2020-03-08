@@ -2,6 +2,7 @@ package digital.content.managment.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,32 +32,49 @@ public class AssignWorkerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		String taskId = request.getParameter("task_id");
-		String workerId = request.getParameter("worker_id");
 		
+		String projectId = request.getParameter("assign_button");
 		ManagerService manager = new ManagerService();
 		
 		try {
-			manager.assignService(taskId, workerId);
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/success.jsp");
-			requestDispatcher.forward(request, response);
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/error.jsp");
-			requestDispatcher.forward(request, response);
+			List<String> tasks = manager.createTasksList(projectId);
+	        request.setAttribute("tasks", tasks);
+	        
+	        List<String> workers = manager.createWorkersList(projectId);
+	        request.setAttribute("workers", workers);
+	        
+	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/assignWorker.jsp");
+	        requestDispatcher.forward(request, response);
+
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
 		}
 		
+		String taskName = request.getParameter("tasks");
+		String workerName = request.getParameter("workers");
+		
+		try {
+			
+			String taskId = manager.findIdOfTask(taskName);
+			System.out.println(taskId+"ejjj");
+			String workerId = manager.findIdOfWorker(workerName);
+			System.out.println(workerId);
+			
+			manager.assignService(taskId, workerId);
+			
+//			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/success.jsp");
+//			requestDispatcher.forward(request, response);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+//			RequestDispatcher requestDispatcher = request.getRequestDispatcher("JspFiles/error.jsp");
+//			requestDispatcher.forward(request, response);
+		}		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

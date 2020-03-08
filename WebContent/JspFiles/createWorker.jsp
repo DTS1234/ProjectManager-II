@@ -26,6 +26,12 @@
 			<button form="createWorkerForm" type="submit">Submit</button>		
 		</form>
 		
+		<form action="http://localhost:8080/ProjectManagment/JspFiles/adminView.jsp">	
+			
+			<button type="submit" >Back</button>
+			
+		</form>
+		
 	</body>
 
 </html>
